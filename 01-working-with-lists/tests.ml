@@ -47,11 +47,21 @@ let p05_tests = tests_from_specs1 P05.reverse [
   ("reverse many", [1;2;3;4;5], [5;4;3;2;1]);
 ];;
 
+let p06_tests = tests_from_specs1 P06.is_palindrome [
+  ("empty is palindrome", [], true);
+  ("single is palindrome", [1], true);
+  ("double is palindrome if match", [1;1], true);
+  ("dobule is not palindrome if diff", [1;2], false);
+  ("long palindrome", [1;2;3;3;2;1], true);
+  ("long not palindrome", [1;2;3;3;2;1;4], false);
+]
+
 let suite =
   "Working with lists">:::
-    p01_tests @ p02_tests @ p03_tests @ p04_tests @ p05_tests
+    p01_tests @ p02_tests @ p03_tests @ p04_tests @ p05_tests @ p06_tests
 ;;
 
 let () =
   run_test_tt_main suite
 ;;
+
