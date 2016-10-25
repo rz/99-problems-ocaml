@@ -56,9 +56,27 @@ let p06_tests = tests_from_specs1 P06.is_palindrome [
   ("long not palindrome", [1;2;3;3;2;1;4], false);
 ]
 
+open P07
+let p07_tests = tests_from_specs1 P07.flatten [
+  ("flatten empty", [], []);
+  ("flatten ones", [ One "a"; One "b"; One "c"], ["a"; "b"; "c"]);
+  ("flatten manys", [Many [One "a"; One "b"]; Many [One "c"; One "d"]], ["a"; "b"; "c"; "d"]);
+  ("flatten mixed", [ One "a" ; Many [ One "b" ; Many [ One "c" ; One "d" ] ; One "e" ] ], ["a"; "b"; "c"; "d"; "e"]);
+]
+
+let p08_tests = tests_from_specs1 P08.compress [
+  ("compress empty", [], []);
+  ("compress single", ["a"], ["a"]);
+  ("compress 2", ["a";"a"], ["a"]);
+  ("compress 3", ["a"; "a"; "a"], ["a"]);
+  ("compress 4", ["a";"a";"a";"a"], ["a"]);
+  ("compress many",  ["a";"a";"a";"a";"b";"c";"c";"a";"a";"d";"e";"e";"e";"e"], ["a"; "b"; "c"; "a"; "d"; "e"]);
+]
+
 let suite =
   "Working with lists">:::
-    p01_tests @ p02_tests @ p03_tests @ p04_tests @ p05_tests @ p06_tests
+    p01_tests @ p02_tests @ p03_tests @ p04_tests @ p05_tests @ p06_tests @
+    p07_tests @ p08_tests
 ;;
 
 let () =
