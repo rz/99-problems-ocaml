@@ -37,3 +37,11 @@ let rec compress = function
   | hd :: tl -> hd :: (compress (drop (hd :: tl) (count_head_repeat (hd :: tl))))
 ;;
 
+
+(* after looking at the solutions, their approach seems way more elegant *)
+ let rec compress = function
+   | [] -> []
+   | [x] -> [x]
+   | a :: (b :: _ as tl) -> if a = b then compress tl else a :: compress tl
+;;
+
