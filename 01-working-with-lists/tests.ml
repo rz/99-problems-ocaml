@@ -73,10 +73,22 @@ let p08_tests = tests_from_specs1 P08.compress [
   ("compress many",  ["a";"a";"a";"a";"b";"c";"c";"a";"a";"d";"e";"e";"e";"e"], ["a"; "b"; "c"; "a"; "d"; "e"]);
 ]
 
+let p09_tests = tests_from_specs1 P09.pack [
+  ("pack empty", [], []);
+  ("pack single", [1], [[1]]);
+  ("pack 3 2 3", [1;1;1;2;2;1;1;1], [[1;1;1];[2;2];[1;1;1]]);
+  ("pack ex", [1;1;1;1;2;3;3;1;1;4;4;5;5;5;5], [[1;1;1;1];[2];[3;3];[1;1];[4;4];[5;5;5;5]]);
+]
+
+let p10_tests = tests_from_specs1 P10.encode [
+  ("encode empty", [], []);
+  ("encode ex", ["a";"a";"a";"a";"b";"c";"c";"a";"a";"d";"e";"e";"e";"e"], [(4, "a"); (1, "b"); (2, "c"); (2, "a"); (1, "d"); (4, "e")]);
+]
+
 let suite =
   "Working with lists">:::
     p01_tests @ p02_tests @ p03_tests @ p04_tests @ p05_tests @ p06_tests @
-    p07_tests @ p08_tests
+    p07_tests @ p08_tests @ p09_tests @ p10_tests
 ;;
 
 let () =
