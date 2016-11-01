@@ -85,10 +85,49 @@ let p10_tests = tests_from_specs1 P10.encode [
   ("encode ex", ["a";"a";"a";"a";"b";"c";"c";"a";"a";"d";"e";"e";"e";"e"], [(4, "a"); (1, "b"); (2, "c"); (2, "a"); (1, "d"); (4, "e")]);
 ]
 
+open P11
+let p11_tests = tests_from_specs1 P11.encode [
+  ("ecode empty", [], []);
+  ("encode one", ["a"], [One "a"]);
+  ("encode two", ["a"; "a"], [Many (2, "a")]);
+  ("encode ex", ["a";"a";"a";"a";"b";"c";"c";"a";"a";"d";"e";"e";"e";"e"], [Many (4, "a"); One "b"; Many (2, "c"); Many (2, "a"); One "d"; Many (4, "e")]);
+]
+
+
+open P12
+let p12_tests = tests_from_specs1 P12.decode [
+  ("decode empty", [], []);
+  ("decode one", [One "a"], ["a"]);
+  ("decode many", [Many(3, "a")], ["a"; "a"; "a"]);
+  ("decode ex", [Many (4,"a"); One "b"; Many (2,"c"); Many (2,"a"); One "d"; Many (4,"e")], ["a"; "a"; "a"; "a"; "b"; "c"; "c"; "a"; "a"; "d"; "e"; "e"; "e"; "e"]);
+]
+
+open P13
+let p13_tests = tests_from_specs1 P13.encode [
+  ("ecode empty", [], []);
+  ("encode one", ["a"], [One "a"]);
+  ("encode two", ["a"; "a"], [Many (2, "a")]);
+  ("encode ex", ["a";"a";"a";"a";"b";"c";"c";"a";"a";"d";"e";"e";"e";"e"], [Many (4, "a"); One "b"; Many (2, "c"); Many (2, "a"); One "d"; Many (4, "e")]);
+]
+
+let p14_tests = tests_from_specs1 P14.duplicate [
+  ("duplicate empty", [], []);
+  ("duplicate one", ["a"], ["a";"a"]);
+  ("duplicate ex", ["a";"b";"c";"c";"d"], ["a"; "a"; "b"; "b"; "c"; "c"; "c"; "c"; "d"; "d"]);
+]
+
+let p15_tests = tests_from_specs2 P15.replicate [
+  ("replicate empty", ([], 5), []);
+  ("replicate one 2", (["a"], 2), ["a";"a"]);
+  ("replicate ex", (["a";"b";"c"], 3), ["a";"a";"a";"b";"b";"b";"c";"c";"c"]);
+]
+
+
 let suite =
   "Working with lists">:::
     p01_tests @ p02_tests @ p03_tests @ p04_tests @ p05_tests @ p06_tests @
-    p07_tests @ p08_tests @ p09_tests @ p10_tests
+    p07_tests @ p08_tests @ p09_tests @ p10_tests @ p11_tests @ p12_tests @
+    p13_tests @ p14_tests @ p15_tests
 ;;
 
 let () =
