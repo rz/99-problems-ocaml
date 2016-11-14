@@ -5,9 +5,13 @@ if $(not $(OCAMLFIND_EXISTS))
    eprintln(This project requires ocamlfind\, but it was not found.)
    exit 1
 
+OCAMLFLAGS [] =
+	-thread # this is so that Core can be included in OCAMLPACKS below (?)
+
 # package names to pass to ocamlfind
 OCAMLPACKS[] =
-   oUnit
+	oUnit
+	Core # so that we can do open Core.std
 
 # compile native or byte code?
 NATIVE_ENABLED = $(OCAMLOPT_EXISTS)
