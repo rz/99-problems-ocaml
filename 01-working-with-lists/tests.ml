@@ -122,12 +122,16 @@ let p15_tests = tests_from_specs2 P15.replicate [
   ("replicate ex", (["a";"b";"c"], 3), ["a";"a";"a";"b";"b";"b";"c";"c";"c"]);
 ]
 
+let p16_tests = tests_from_specs2 P16.drop [
+  ("drop empty", ([], 3), []);
+  ("drop ex", (["a";"b";"c";"d";"e";"f";"g";"h";"i";"j"], 3), ["a"; "b"; "d"; "e"; "g"; "h"; "j"]);
+]
 
 let suite =
   "Working with lists">:::
     p01_tests @ p02_tests @ p03_tests @ p04_tests @ p05_tests @ p06_tests @
     p07_tests @ p08_tests @ p09_tests @ p10_tests @ p11_tests @ p12_tests @
-    p13_tests @ p14_tests @ p15_tests
+    p13_tests @ p14_tests @ p15_tests @ p16_tests
 ;;
 
 let () =
